@@ -1,5 +1,5 @@
 package Stacks;
-class Stacks<T> {
+class Stacks_using_Array<T> {
     T[] array = (T[]) new Object[10];
     int top;
 
@@ -50,7 +50,7 @@ class Stacks<T> {
     }
 
     public static void main(String[] args) {
-        Stacks<Integer> stacks = new Stacks<Integer>();
+        Stacks_using_Array<Integer> stacks = new Stacks_using_Array<Integer>();
         stacks.push(4);
         stacks.push(5);
         System.out.println(stacks.pop());
