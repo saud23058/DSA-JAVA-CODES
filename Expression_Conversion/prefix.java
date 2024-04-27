@@ -1,93 +1,51 @@
 package Expression_Conversion;
 
-public class prefix<T> {
-    class Node {
-        T data;
-        Node next;
+import java.util.Stack;
 
-    }
+public class prefix {
+    public static Double preEvl(String exp) {
+        Stack<Double> _prefix = new Stack<>();
+        String str[] = exp.split(" ");
+        for (int i = str.length - 1; i >= 0; i--) {
+            if (str[i].length() > 1 && Character.isDigit(str[i].charAt(1))) {
 
-    Node start = null;
-
-    private boolean isEmpty() {
-        return (start == null);
-    }
-
-    public void push(T value) {
-        Node n = new Node();
-        n.data = value;
-        n.next = null;
-
-        if (isEmpty()) {
-            start = n;
-        } else {
-            n.next = start;
-            start = n;
-        }
-    }
-
-    public T pop() {
-        if (isEmpty()) {
-            System.out.println("Stack is Empty");
-            return null;
-        } else {
-            T value = start.data;
-          start = start.next;
-          return value;
-        }
-    }
-
-
-    public void printStack(){
-        if(isEmpty()){
-            System.out.println("Stack is Empty");
-            return;
-        }else{
-            Node t = start;
-            while (t != null) {
-                System.out.print(t.data + "  ");
-                t=t.next;
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        prefix<Double> _prefix = new prefix<>();
-    
-        String exp = "-+4*237";
-    
-        for (int i = exp.length() - 1; i >= 0; i--) {
-            char currentChar = exp.charAt(i);
-            if (Character.isDigit(currentChar)) {
-                double num = Double.parseDouble("" + currentChar);
-                _prefix.push(num);
+                _prefix.push(Double.parseDouble(str[i]));
+            } else if (Character.isDigit(str[i].charAt(0))) {
+                _prefix.push(Double.parseDouble(str[i]));
             } else {
-                switch (currentChar) {
-                    case '+':
-                        double op1 = _prefix.pop();
-                        double op2 = _prefix.pop();
-                        _prefix.push(op1 + op2);
-                        break;
-                    case '-':
+                double op1;
+                double op2;
+                switch (str[i]) {
+                    case "+":
                         op1 = _prefix.pop();
                         op2 = _prefix.pop();
-                        _prefix.push(op1 - op2);
+                        _prefix.push(op1 + op2);
                         break;
-                    case '*':
+                    case "-":
+                        op1 = _prefix.pop();
+                        op2 = _prefix.pop();
+                        _prefix.push(op2 - op1);
+                        break;
+                    case "*":
                         op1 = _prefix.pop();
                         op2 = _prefix.pop();
                         _prefix.push(op1 * op2);
                         break;
                     default:
-                        System.out.println("Other signs");
+                        System.out.println("Invalid operator");
                         break;
                 }
             }
         }
-        
-    
-        System.out.println("Result :" + _prefix.pop());
+
+        return _prefix.pop();
     }
-    
+
+    public static void main(String[] args) {
+
+        String exp = "+ 2 * 13 4";
+        System.out.println("Result :" + preEvl(exp));
+
+    }
 
 }

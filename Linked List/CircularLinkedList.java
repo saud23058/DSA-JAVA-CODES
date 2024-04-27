@@ -99,12 +99,34 @@ public class CircularLinkedList<T> {
         System.out.println(start.data); // Print the start node again to indicate circular
     }
 
+
+    public void insertAtBetween(T value , int pos){
+        Node n = new Node();
+        n.data= value;
+        int count = 0;
+        if(pos<1){
+            System.out.println("Invalid position");
+            return;
+        }else if(isEmpty()){
+            insertAtStart(value);
+        }else{
+          Node currentNode = start;
+          while (count < pos-1 && currentNode.next != start) {
+            currentNode= currentNode.next;
+            count++;
+          }
+          n.next  = currentNode.next;
+          currentNode.next = n;
+
+        }
+    }
+
     public static void main(String[] args) {
         CircularLinkedList<Integer> list = new CircularLinkedList<>();
         list.insertAtStart(4);
         list.insertAtEnd(5);
         list.insertAtStart(1);
-        list.deleteNodeAtEnd();
+        list.insertAtBetween(10, 3);
         list.printList();
     }
 }
