@@ -79,13 +79,45 @@ public class SingleLinkedList<T> {
         }
         System.out.println("null");
     }
+
+    public void insertAfter(T inLinkedNum, T num) {
+        Node t = start;
+        while (t.next != null) {
+            if (t.data == inLinkedNum) {
+                Node n = new Node();
+                n.data = num;
+                n.next = t.next;
+                t.next = n;
+                return;
+            }
+            t = t.next;
+        }
+        System.out.println(inLinkedNum + "Not found ");
+    }
+    
+    public void deleteAfter(T inLinkedNum, T num) {
+        Node t = start;
+        while (t.next != null) {
+            if (t.data == inLinkedNum) {
+                if (t.next != null) {
+                    Node n = t.next; 
+                    t.next = n.next;
+                }
+                return;
+            }
+            t = t.next;
+        }
+        System.out.println(inLinkedNum + "Not found ");
+    }
+    
     
     public static void main(String[] args) {
         SingleLinkedList<Integer> list = new SingleLinkedList<>();
         list.insertAtStart(4); // Corrected the spelling mistake here
         list.insertAtEnd(5);
         list.insertAtStart(1);
-        list.deleteNodeAtEnd();
+        list.insertAfter(1, 2);
+        list.deleteAfter(1, 2);
         list.printList();
     }
 }

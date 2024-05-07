@@ -41,6 +41,15 @@ public class Stacks_using_LinkedList<T> {
         }
         
     }
+    public void peek(){
+        if(isEmpty()){
+            System.out.println("Stack is Empty");
+            return;
+        }else{
+            System.out.println(start.data);
+            return;
+        }
+    } 
 
     public void printStack(){
         if (isEmpty()) {
