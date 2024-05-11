@@ -38,7 +38,7 @@ public class postfix {
     public static void main(String[] args) {
    
 
-        String exp = "+ 2 * 13 4";
+        String exp = "2 13 + 4 *";
         System.out.println("Result :"+postEvl(exp));
         
     }
